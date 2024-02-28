@@ -1,0 +1,14 @@
+<odoo>
+    <record id="product_delivery_charge" model="ir.ui.view">
+		<field name="name">Delivery Charge</field>
+		<field name="model">sale.order</field>
+		<field name="inherit_id" ref="sale.view_order_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+				<field name="delivery_charge"/>
+				<field name="sum"/>
+			</xpath>
+		</field>
+	</record>
+
+</odoo>

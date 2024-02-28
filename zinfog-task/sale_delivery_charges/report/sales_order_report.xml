@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_sales_order_pdf">
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <style type="text/css">
+                    .table_data {
+                    border-top : 1px solid black;
+                    border-bottom : 1px solid black;
+                    border-left : 1px solid black;
+                    border-right : 1px solid black;
+                    vertical-align: middle;
+                    }
+                    .customer-table {
+                    page-break-before: avoid;
+                    }
+                </style>
+                <div class="page">
+                    <table width="100%">
+                        <tr>
+                            <tr>
+                                <td style="font-size:85%; padding-top: 7px; border:white;">
+                                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M')"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size:85%; padding-top: 7px; border:white;">
+                                    <b>From Date:</b>
+                                    <b>
+                                        <span t-esc="from_date"/>
+                                    </b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size:85%; padding-top: 7px; border:white;">
+                                    <b>To Date:</b>
+                                    <b>
+                                        <t t-esc="to_date"/>
+                                    </b>
+                                </td>
+                            </tr>
+                        </tr>
+                    </table>
+                </div>
+                <br/>
+                <br/>
+                <table width="100%">
+                    <tr>
+                        <td align="center" style="font-size:85%; border:white;">
+                            <b>
+                                <t t-esc="company"/>
+                            </b>
+                        </td>
+                    </tr>
+                </table>
+                <br/>
+                <t t-foreach="cust_code" t-as="cu">
+                    <table width="100%" class="customer-table">
+                        <tr>
+                            <th style="background-color: #c2c2d6;padding-top:10px;" colspan="7">
+                                <span t-att-style="style" t-esc="cu['customer']"/>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="background-color:#efeff5; width: 12%;font-size: 18px;">Sale Order No</th>
+                            <th style="background-color:#efeff5; width: 10%;font-size: 18px;text-align:center;">
+                                Quantity
+                            </th>
+                            <th style="background-color:#efeff5; width: 30%; text-align:center;font-size: 18px;">Item</th>
+                            <th style="background-color:#efeff5; width: 10%; text-align:center; font-size: 18px;">
+                                Sales Price
+                            </th>
+                        </tr>
+                        <t t-foreach="vals" t-as="v">
+                            <t t-if="cu['customer_id'] == v['rp_id']">
+                                <tr>
+                                    <tr>
+                                        <td class="table_data" align="center"
+                                            style="font-size: 13px;padding-left: 5px;padding-top:10px;">
+                                            <span t-att-style="style" t-esc="v['si_name']"/>
+                                        </td>
+                                        <td class="table_data" align="center" style="font-size: 13px;padding-top:10px;">
+                                            <span t-att-style="style" t-esc="v['total_qty']"/>
+                                        </td>
+                                        <td class="table_data" align="center"
+                                            style="font-size: 13px;padding-left: 5px;padding-top:10px;">
+                                            <span t-att-style="style" t-esc="v['pt_name']"/>
+                                        </td>
+                                        <td class="table_data" align="center" style="font-size: 13px;padding-top:10px;">
+                                            <span t-att-style="style" t-esc="v['total_qty'] * v['pt_list_price']"/>
+                                        </td>
+                                    </tr>
+                                </tr>
+                            </t>
+                        </t>
+                    </table>
+                </t>
+                <div class="footer o_standard_footer">
+                    <div class="row text-center">
+                        <div class="col col-12 text-center">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <span class="page"/>
+                                </li>
+                                <li class="list-inline-item">/</li>
+                                <li class="list-inline-item">
+                                    <span class="topage"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
+
+
+
+
+
+
+

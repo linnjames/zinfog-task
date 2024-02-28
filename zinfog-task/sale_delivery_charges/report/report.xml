@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="paperformat_sales_order_report_pdf" model="report.paperformat">
+        <field name="name">Company Order Report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">30</field>
+        <field name="margin_bottom">30</field>
+        <field name="margin_left">5</field>
+        <field name="margin_right">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">20</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <record id="report_sales_order_report_pdf" model="ir.actions.report">
+        <field name="name">Sales Order Wizard Report</field>
+        <field name="model">sales.order.report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">sale_delivery_charges.report_sales_order_pdf</field>
+        <field name="report_file">sale_delivery_charges.report_sales_order_pdf</field>
+        <field name="paperformat_id" ref="sale_delivery_charges.paperformat_sales_order_report_pdf"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
+
